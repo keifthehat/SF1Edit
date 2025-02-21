@@ -26,6 +26,11 @@ unsigned char ActionChance = 255;
 unsigned char ClassSpecial = 255;
 unsigned char SpecialChance = 255;
 
+unsigned char BaseResistance;
+unsigned char TwentyFiveResistance;
+unsigned char FiftyResistance;
+unsigned char TwentyFiveWeakness;
+
 unsigned char ClassPromote[64];
 
 void LoadClass(char *path,bool single=false){
@@ -125,6 +130,15 @@ void LoadClass(char *path,bool single=false){
 		}
 		if(!single||i==select[mode])Classes[i][r]='\0';
 	}
+
+	fseek(fp, 0x211E2, SEEK_SET); //Base Damage Taken (100 is Default)
+	fscanf(fp, "%c", &BaseResistance);
+	fseek(fp, 0x211E3, SEEK_SET); //25% Resistance (75 is Default)
+	fscanf(fp, "%c", &TwentyFiveResistance);
+	fseek(fp, 0x211E4, SEEK_SET); //50% Resistance (50 is Default)
+	fscanf(fp, "%c", &FiftyResistance);
+	fseek(fp, 0x211E5, SEEK_SET); //25% Weakness (125 is Default)
+	fscanf(fp, "%c", &TwentyFiveWeakness);
 
 	fseek(fp,0x203C4,SEEK_SET);
 	fscanf(fp,"%c",&r);

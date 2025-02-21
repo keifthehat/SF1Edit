@@ -462,6 +462,24 @@ void SaveMech(){
 		fseek(fp, 0x20D01, SEEK_SET);
 		fprintf(fp, "%c", HealerClasses[3]); // Save fourth healer class
 
+		fseek(fp, 0x16C45, SEEK_SET);
+		fprintf(fp, "%c", UnsellableItems[0]); //Unsellable Item 1
+		fseek(fp, 0x16C4D, SEEK_SET);
+		fprintf(fp, "%c", UnsellableItems[1]); //Unsellable Item 2
+		fseek(fp, 0x16C55, SEEK_SET);
+		fprintf(fp, "%c", UnsellableItems[2]); //Unsellable Item 3
+		fseek(fp, 0x16C5D, SEEK_SET);
+		fprintf(fp, "%c", UnsellableItems[3]); //Unsellable Item 4
+		fseek(fp, 0x16C65, SEEK_SET);
+		fprintf(fp, "%c", UnsellableItems[4]); //Unsellable Item 5
+		fseek(fp, 0x16C6D, SEEK_SET);
+		fprintf(fp, "%c", UnsellableItems[5]); //Unsellable Item 6
+
+		fseek(fp, 0x20ECB, SEEK_SET);
+		fprintf(fp, "%c", WhoIsJogurt);
+		fseek(fp, 0x20ED1, SEEK_SET);
+		fprintf(fp, "%c", JogurtItem);
+
 		// Save "All Classes Get Heal EXP" setting to offset 0x20CEC
 		fseek(fp, 0x20CEC, SEEK_SET);
 		if (AllHealEXP) {

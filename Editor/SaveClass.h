@@ -518,6 +518,15 @@ void SaveClass(){
 			Classes[i][r]='\0';
 		}
 
+		fseek(fp, 0x211E2, SEEK_SET); //Base Damage Taken (100 is Default)
+		fprintf(fp, "%c", BaseResistance);
+		fseek(fp, 0x211E3, SEEK_SET); //25% Resistance (75 is Default)
+		fprintf(fp, "%c", TwentyFiveResistance);
+		fseek(fp, 0x211E4, SEEK_SET); //50% Resistance (50 is Default)
+		fprintf(fp, "%c", FiftyResistance);
+		fseek(fp, 0x211E5, SEEK_SET); //25% Weakness (125 is Default)
+		fprintf(fp, "%c", TwentyFiveWeakness);
+
 		fseek(fp,0x203C4,SEEK_SET);
 		fprintf(fp,"%c",(ClassOffset&0xFF000000)/0x1000000);
 		fprintf(fp,"%c",(ClassOffset&0x00FF0000)/0x10000);

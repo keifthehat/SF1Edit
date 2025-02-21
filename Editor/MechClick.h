@@ -9,6 +9,9 @@ if (p.x >= 10 && p.x <= 100) {
     else if (p.y >= 90 && p.y <= 120) {
         currentPage = 3; // Mechanics Page
     }
+    else if (p.y >= 130 && p.y <= 160) {
+        currentPage = 4; //Items Page
+    }
 }
 
 if (currentPage == 1) {
@@ -205,7 +208,32 @@ else if (currentPage == 3) {
         ExtendStatItems = !ExtendStatItems; // Add MP Increase Effect
     }
 
-    if (p.x >= centerOffset + 150 && p.x <= centerOffset + 163 &&p.y >= yStart + 330 && p.y <= yStart + 343) {
+    if (p.x >= centerOffset + 150 && p.x <= centerOffset + 163 && p.y >= yStart + 330 && p.y <= yStart + 343) {
         AddMPEffect = !AddMPEffect; // Add New Effects
+    }
+}
+else if (currentPage == 4) {
+        // Page 4: Items
+        int startX = 200, startY = 50;
+        for (int i = 0; i < 6; i++) {
+            if (p.x >= startX && p.x <= startX + 300 &&
+                p.y >= startY + i * 20 && p.y < startY + i * 20 + 20) {
+                focus = 26 + i;  // focus 26 to 31 for unsellable items 1-6
+                return 0;
+            }
+        }
+        // WhoIsJogurt
+        int whoY = startY + 6 * 20 + 20;
+        if (p.x >= startX && p.x <= startX + 300 &&
+            p.y >= whoY && p.y < whoY + 20) {
+            focus = 32;
+            return 0;
+        }
+        // JogurtItem:
+        int jogY = whoY + 20;
+        if (p.x >= startX && p.x <= startX + 300 &&
+            p.y >= jogY && p.y < jogY + 20) {
+            focus = 33;
+            return 0;
     }
 }

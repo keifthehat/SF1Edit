@@ -1,4 +1,4 @@
-int currentPage = 1; // 1 = EXP, 2 = Fixes, 3 = Mechanics
+int currentPage = 1; // 1 = EXP, 2 = Fixes, 3 = Mechanics, 4 = Items
 
 unsigned char Poison;
 unsigned char DamageSpread;
@@ -37,6 +37,8 @@ unsigned char HPEXPPercent;
 unsigned char HPEXPMin;
 unsigned char DetoxEXP;
 unsigned char SleepWakeChance;
+unsigned char WhoIsJogurt;
+unsigned char JogurtItem;
 
 unsigned char ProLevel;
 unsigned char ProLevelAdd;
@@ -51,6 +53,7 @@ unsigned char EXPMinus2;
 unsigned char EXP3Below; //character is 3 levels or more than the enemy
 
 unsigned char HealerClasses[4]; // Stores IDs of healer classes
+unsigned char UnsellableItems[6]; //Stores IDs of hard-coded unsellable items
 
 long PoisonOffset;
 
@@ -155,6 +158,24 @@ void LoadMech(char *path){
 	fscanf(fp, "%c", &HealerClasses[2]); // Load third healer class
 	fseek(fp, 0x20D01, SEEK_SET);
 	fscanf(fp, "%c", &HealerClasses[3]); // Load fourth healer class
+
+	fseek(fp, 0x16C45, SEEK_SET);
+	fscanf(fp, "%c", &UnsellableItems[0]); //Unsellable Item 1
+	fseek(fp, 0x16C4D, SEEK_SET);
+	fscanf(fp, "%c", &UnsellableItems[1]); //Unsellable Item 2
+	fseek(fp, 0x16C55, SEEK_SET);
+	fscanf(fp, "%c", &UnsellableItems[2]); //Unsellable Item 3
+	fseek(fp, 0x16C5D, SEEK_SET);
+	fscanf(fp, "%c", &UnsellableItems[3]); //Unsellable Item 4
+	fseek(fp, 0x16C65, SEEK_SET);
+	fscanf(fp, "%c", &UnsellableItems[4]); //Unsellable Item 5
+	fseek(fp, 0x16C6D, SEEK_SET);
+	fscanf(fp, "%c", &UnsellableItems[5]); //Unsellable Item 6
+
+	fseek(fp, 0x20ECB, SEEK_SET);
+	fscanf(fp, "%c", &WhoIsJogurt); //Determines which character is Jogurt for the item drop (default is ID 29, aka, Jogurt)
+	fseek(fp, 0x20ED1, SEEK_SET);
+	fscanf(fp, "%c", &JogurtItem); //Determines what item drops from the Jogurt-marked character (default is the Jogurt Ring)
 
 	/* effect_InflictStatus */
 	fseek(fp, 0x20F94, SEEK_SET);

@@ -198,11 +198,47 @@
 					BitBlt(memdc,740,188+16*(7-i),13,13,bmpdc,0,0,SRCCOPY);
 				}
 				
-				TextOut(memdc,540,8,"RESISTANCES",11);
-				TextOut(memdc,480,26,"Base",4);
-				TextOut(memdc,530,26,"25%",3);
-				TextOut(memdc,580,26,"50%",3);
-				TextOut(memdc,630,26,"25% Weakness",12);
+				TextOut(memdc, 510, 8, "RESISTANCES", 11);
+				TextOut(memdc, 420, 26, "BASE", 4);
+
+				{
+					char buf[16];
+
+					// Field 1: BaseResistance at (500,26)
+					sprintf(buf, "%3d%%", BaseResistance);
+					TextOut(memdc, 470, 26, buf, strlen(buf));
+
+					// Field 2: 25% Resistance at (600,26)
+					sprintf(buf, "%3d%%", TwentyFiveResistance);
+					TextOut(memdc, 520, 26, buf, strlen(buf));
+
+					// Field 3: 50% Resistance at (700,26)
+					sprintf(buf, "%3d%%", FiftyResistance);
+					TextOut(memdc, 570, 26, buf, strlen(buf));
+
+					// Field 4: 25% Weakness at (800,26)
+					sprintf(buf, "%3d%%", TwentyFiveWeakness);
+					TextOut(memdc, 620, 26, buf, strlen(buf));
+				}
+				if (cursor && (focus >= 50 && focus <= 53)) {
+					int xPos = 0;
+					switch (focus) {
+					case 50:
+						xPos = 470 + 32;  // field 1 ends at 500+32 = 532
+						break;
+					case 51:
+						xPos = 520 + 32;  // field 2 ends at 600+32 = 632
+						break;
+					case 52:
+						xPos = 570 + 32;  // field 3 ends at 700+32 = 732
+						break;
+					case 53:
+						xPos = 620 + 32;  // field 4 ends at 800+32 = 832
+						break;
+					}
+					TextOut(memdc, xPos, 26, "|", 1);
+				}
+
 				TextOut(memdc,380,42,"Evasion",7);
 				TextOut(memdc,380,58,"Undefined",9);
 				TextOut(memdc,380,74,"Chaos Breaker",13);

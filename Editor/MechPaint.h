@@ -7,10 +7,14 @@ else if (currentPage == 2) {
 else if (currentPage == 3) {
     Rectangle(memdc, 10, 90, 150, 120); // Highlight Mechanics button
 }
+else if (currentPage == 4) {
+    Rectangle(memdc, 10, 130, 150, 160); //Highlight Items button
+}
 
 TextOut(memdc, 20, 15, "Levels & EXP", 13);
 TextOut(memdc, 20, 55, "Various Fixes", 14);
 TextOut(memdc, 20, 95, "Mechanics", 9);
+TextOut(memdc, 20, 135, "Items", 7);
 
 
 if (currentPage == 1) {
@@ -291,4 +295,31 @@ else if (currentPage == 3) {
     if (AddMPEffect) SelectObject(bmpdc, checkon);
     else SelectObject(bmpdc, checkoff);
     BitBlt(memdc, centerOffset + 150, yStart + 330, 13, 13, bmpdc, 0, 0, SRCCOPY);
+}
+else if (currentPage == 4) {
+        // Page 4: Items
+        // Draw the Items button highlight:
+        int startX = 200, startY = 50;
+
+        TextOut(memdc, startX, startY - 20, "Unsellable Items", 17);
+        for (int i = 0; i < 6; i++) {
+            char line[64];
+            sprintf(line, "Item %d: %d - %s", i + 1, UnsellableItems[i], ItemName[UnsellableItems[i]]);
+            if (focus == 26 + i && cursor)sprintf(line, "%s|", line);
+            TextOut(memdc, startX, startY + i * 20, line, strlen(line));
+        }
+        int nextY = startY + 6 * 20 + 20;
+        {
+            char line[64];
+            sprintf(line, "Who Is Jogurt: %d - %s", WhoIsJogurt, CharName[WhoIsJogurt]);
+            if (focus == 32 && cursor)sprintf(line, "%s|", line);
+            TextOut(memdc, startX, nextY, line, strlen(line));
+        }
+        nextY += 20;
+        {
+            char line[64];
+            sprintf(line, "Jogurt Item: %d - %s", JogurtItem, ItemName[JogurtItem]);
+            if (focus == 33 && cursor)sprintf(line, "%s|", line);
+            TextOut(memdc, startX, nextY, line, strlen(line));
+        }
 }

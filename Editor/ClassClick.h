@@ -346,3 +346,29 @@
 						}
 					}
 				}
+				if (p.y >= 26 && p.y < 42) {
+					// Field 1: BaseResistance clickable region: from x=500 to x=532.
+					if (p.x >= 470 && p.x < 492) {
+						focus = 50;
+						cursor = true;
+						return 0;
+					}
+					// Field 2: 25% Resistance clickable region: from x=600 to x=632.
+					else if (p.x >= 520 && p.x < 542) {
+						focus = 51;
+						cursor = true;
+						return 0;
+					}
+					// Field 3: 50% Resistance clickable region: from x=700 to x=732.
+					else if (p.x >= 570 && p.x < 592) {
+						focus = 52;
+						cursor = true;
+						return 0;
+					}
+					// Field 4: 25% Weakness clickable region: from x=800 to x=832.
+					else if (p.x >= 620 && p.x < 642) {
+						focus = 53;
+						cursor = true;
+						return 0;
+					}
+				}
