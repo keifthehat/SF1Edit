@@ -907,8 +907,10 @@
 
 				}
 				if (submode[mode] == 4) {
-					if (p.x >= 200 && p.x <= 240 && p.y >= 10 && p.y <= 26) {
-						focus = 1;
+					if (NumChars <= MIN_CHARS) {
+						if (p.x >= 200 && p.x <= 240 && p.y >= 10 && p.y <= 26) {
+							focus = 1;
+						}
 					}
 					if (p.x >= 200 && p.x <= 240 && p.y >= 36 && p.y <= 52) {
 						focus = 2;

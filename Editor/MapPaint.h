@@ -1411,18 +1411,21 @@
 		}
 	}
 	if (submode[mode] == 4) {
-		TextOut(memdc, 50, 10, "Nova HQ Sprite", 14);   //14 is the number of characters that %d prints below, 50 is the x and 10 is the y
+		if (NumChars <= MIN_CHARS) {
+			TextOut(memdc, 50, 10, "Nova HQ Sprite", 14);
+		}
 		TextOut(memdc, 50, 40, "Blue Flame Sprite", 17);
 		TextOut(memdc, 50, 70, "Jogurt Status Sprite", 20);
 
-		if (focus == 1 && cursor) {
-			sprintf(out, "%d|", NovaSprite);
+		if (NumChars <= MIN_CHARS) {
+			if (focus == 1 && cursor) {
+				sprintf(out, "%d|", NovaSprite);
+			}
+			else {
+				sprintf(out, "%d", NovaSprite);
+			}
+			TextOut(memdc, 200, 10, out, strlen(out));
 		}
-		else {
-			sprintf(out, "%d", NovaSprite);
-		}
-		TextOut(memdc, 200, 10, out, strlen(out));
-
 
 		if (focus == 2 && cursor) {
 			sprintf(out, "%d|", BlueFlameSprite);
@@ -1442,16 +1445,18 @@
 			int width = MSSize[0][0][0];
 			int height = MSSize[0][0][1];
 
-			for (x = 0; x < width / 2; x++) {
-				for (y = 0; y < height; y++) {
-					int k = MapSprites[NovaSprite][0][x + 24 * cursor + y * width];
-					if (k < 0)k = 0;
-					if (k) {
-						if (!MSPalette[NovaSprite]) {
-							SetPixel(memdc, x + 230, y + 4, RGB(FMSPalette[k][0], FMSPalette[k][1], FMSPalette[k][2]));
-						}
-						else {
-							SetPixel(memdc, x + 230, y + 4, RGB(EMSPalette[k][0], EMSPalette[k][1], EMSPalette[k][2]));
+			if (NumChars <= MIN_CHARS) {
+				for (x = 0; x < width / 2; x++) {
+					for (y = 0; y < height; y++) {
+						int k = MapSprites[NovaSprite][0][x + 24 * cursor + y * width];
+						if (k < 0)k = 0;
+						if (k) {
+							if (!MSPalette[NovaSprite]) {
+								SetPixel(memdc, x + 230, y + 4, RGB(FMSPalette[k][0], FMSPalette[k][1], FMSPalette[k][2]));
+							}
+							else {
+								SetPixel(memdc, x + 230, y + 4, RGB(EMSPalette[k][0], EMSPalette[k][1], EMSPalette[k][2]));
+							}
 						}
 					}
 				}
