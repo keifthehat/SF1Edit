@@ -919,3 +919,24 @@
 						focus = 3;
 					}
 				}
+				if (submode[mode] == 4) {
+					const int END_FOCUS_OFFSET = 50;
+					int baseStart = 64 + MSSize[0][0][1] + 10;
+					int startY = baseStart + 20;
+					for (int i = 0; i < 9; i++) {
+						int baseY = startY + i * 30;
+						if (p.x >= 50 && p.x <= 90 && p.y >= baseY && p.y <= baseY + 30) {
+							focus = END_FOCUS_OFFSET + i * 3;
+							return 0;
+						}
+						if (p.x >= 90 && p.x <= 130 && p.y >= baseY && p.y <= baseY + 30) {
+							focus = END_FOCUS_OFFSET + i * 3 + 1;
+							return 0;
+						}
+						if (p.x >= 130 && p.x <= 170 && p.y >= baseY && p.y <= baseY + 30) {
+							focus = END_FOCUS_OFFSET + i * 3 + 2;
+							return 0;
+						}
+					}
+					return 0;
+				}

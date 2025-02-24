@@ -59,6 +59,14 @@ void SaveMap(){
 		fseek(fp, 0x23A79, SEEK_SET);
 		fprintf(fp, "%c", JogurtStatusSprite);
 
+		// Save End Scene Characters to ROM at offset 0x6AB8
+		fseek(fp, 0x6AB8, SEEK_SET);
+		for (int i = 0; i < NUM_ENDSCENE_CHARS; i++) {
+			for (int j = 0; j < 4; j++) {
+				fprintf(fp, "%c", EndSceneChars[i][j]);
+			}
+		}
+
 		long o;
 
 		o = 0x1EA000;

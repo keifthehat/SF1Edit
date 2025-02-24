@@ -84,6 +84,9 @@ bool DisplaySprites=false;
 bool DisplayHQ=false;
 bool DisplaySpecial = false;
 
+#define NUM_ENDSCENE_CHARS 32
+unsigned char EndSceneChars[NUM_ENDSCENE_CHARS][4];
+int EndSceneEdit[9][3];
 
 long HQPosOffset;
 int  NumHQPos;
@@ -133,6 +136,13 @@ void LoadMap(char *path, bool single=false){
 			MapSpecialTiles[i][j][0] = 0xFF;
 			MapSpecialTiles[i][j][1] = 0xFF;
 			MapSpecialTiles[i][j][2] = 0xFF;
+		}
+	}
+
+	fseek(fp, 0x6AB8, SEEK_SET);
+	for (int i = 0; i < NUM_ENDSCENE_CHARS; i++) {
+		for (int j = 0; j < 4; j++) {
+			fscanf(fp, "%c", &EndSceneChars[i][j]);
 		}
 	}
 

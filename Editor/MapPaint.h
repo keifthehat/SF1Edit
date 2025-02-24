@@ -1491,3 +1491,57 @@
 			}
 		}
 	}
+	if (GraphicsLoaded && submode[mode] == 4) {
+		int width = MSSize[0][0][0];
+		int height = MSSize[0][0][1];
+		int i, x, y;
+		char out[64];
+		const int END_FOCUS_OFFSET = 50;
+		int baseStart = 64 + MSSize[0][0][1] + 10;
+		TextOut(memdc, 50, baseStart, "Cliff Scene Sprites", strlen("Cliff Scene Sprites"));
+		int startY = baseStart + 20;
+		for (i = 0; i < 9; i++) {
+			int baseY = startY + i * 30;  // Each row is 30 pixels apart.
+
+			if (focus == END_FOCUS_OFFSET + i * 3) {
+				sprintf(out, "ID:%d|", EndSceneChars[i][0]);
+			}
+			else {
+				sprintf(out, "ID:%d", EndSceneChars[i][0]);
+			}
+			TextOut(memdc, 50, baseY, out, strlen(out));
+
+			if (focus == END_FOCUS_OFFSET + i * 3 + 1) {
+				sprintf(out, "X:%d|", EndSceneChars[i][1]);
+			}
+			else {
+				sprintf(out, "X:%d", EndSceneChars[i][1]);
+			}
+			TextOut(memdc, 90, baseY, out, strlen(out));
+
+			if (focus == END_FOCUS_OFFSET + i * 3 + 2) {
+				sprintf(out, "Y:%d|", EndSceneChars[i][2]);
+			}
+			else {
+				sprintf(out, "Y:%d", EndSceneChars[i][2]);
+			}
+			TextOut(memdc, 130, baseY, out, strlen(out));
+
+			int spriteIndex = EndSceneChars[i][0];
+			for (x = 0; x < width / 2; x++) {
+				for (y = 0; y < height; y++) {
+					int k = MapSprites[spriteIndex][0][x + 24 * cursor + y * width];
+					if (k < 0)
+						k = 0;
+					if (k) {
+						if (!MSPalette[spriteIndex])
+							SetPixel(memdc, x + 230, y + baseY - 4,
+								RGB(FMSPalette[k][0], FMSPalette[k][1], FMSPalette[k][2]));
+						else
+							SetPixel(memdc, x + 230, y + baseY - 4,
+								RGB(EMSPalette[k][0], EMSPalette[k][1], EMSPalette[k][2]));
+					}
+				}
+			}
+		}
+	}

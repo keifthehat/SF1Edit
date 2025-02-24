@@ -983,3 +983,23 @@
 						}
 					}
 				}
+				if (submode[mode] == 4 && focus >= 50) {
+					const int END_FOCUS_OFFSET = 50;
+					int entry = (focus - END_FOCUS_OFFSET) / 3;
+					int field = (focus - END_FOCUS_OFFSET) % 3;
+					int digit = c - '0';
+
+					if (digit >= 0 && digit <= 9) {
+						if (EndSceneEdit[entry][field] < 1000) { 
+							EndSceneEdit[entry][field] = EndSceneEdit[entry][field] * 10 + digit;
+						}
+					}
+					if (c == 8) {
+						EndSceneEdit[entry][field] /= 10;
+					}
+					if (EndSceneEdit[entry][field] > 255) {
+						EndSceneEdit[entry][field] = 255;
+					}
+					EndSceneChars[entry][field] = (unsigned char)EndSceneEdit[entry][field];
+					return 0;
+				}
