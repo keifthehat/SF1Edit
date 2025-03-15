@@ -529,15 +529,17 @@ void SaveMech(){
 
 
 		/* CalculateInitialStatValue */
-		fseek(fp, 0x24A1A, SEEK_SET);
-		fscanf(fp, "%c", &r);
+//		fseek(fp, 0x24A1A, SEEK_SET);
+//		fscanf(fp, "%c", &r);
 
-		if (r == 0x4E) {
-			fseek(fp, 0x14170F, SEEK_SET);
-		}
-		else {
-			fseek(fp, 0x24A21, SEEK_SET);
-		}
+//		if (r == 0x4E) {
+//			fseek(fp, 0x14170F, SEEK_SET);
+//		}
+//		else {
+//			fseek(fp, 0x24A21, SEEK_SET);
+//		}
+
+		fseek(fp, 0x24A21, SEEK_SET);
 		fprintf(fp, "%c", PromotePercent);
 
 

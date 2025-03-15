@@ -471,48 +471,48 @@
 			fprintf(fp, "%c", 0x75);
 
 			/* CalculateInitialStatValue */
-			fseek(fp, 0x24A1A, SEEK_SET);
-			fprintf(fp, "%c", 0x4E); // jsr     ApplyGrowthTargetToInitialStatValue
-			fprintf(fp, "%c", 0xB9);
-			fprintf(fp, "%c", 0x00);
-			fprintf(fp, "%c", 0x14);
-			fprintf(fp, "%c", 0x17);
-			fprintf(fp, "%c", 0x00);
-			fprintf(fp, "%c", 0x4E); // nop
-			fprintf(fp, "%c", 0x71);
-			fprintf(fp, "%c", 0x4E); // nop
-			fprintf(fp, "%c", 0x71);
-			fprintf(fp, "%c", 0x4E); // nop
-			fprintf(fp, "%c", 0x71);
+//			fseek(fp, 0x24A1A, SEEK_SET);
+//			fprintf(fp, "%c", 0x4E); // jsr     ApplyGrowthTargetToInitialStatValue
+//			fprintf(fp, "%c", 0xB9);
+//			fprintf(fp, "%c", 0x00);
+//			fprintf(fp, "%c", 0x14);
+//			fprintf(fp, "%c", 0x17);
+//			fprintf(fp, "%c", 0x00);
+//			fprintf(fp, "%c", 0x4E); // nop
+//			fprintf(fp, "%c", 0x71);
+//			fprintf(fp, "%c", 0x4E); // nop
+//			fprintf(fp, "%c", 0x71);
+//			fprintf(fp, "%c", 0x4E); // nop
+//			fprintf(fp, "%c", 0x71);
 
 			/* ApplyGrowthTargetToInitialStatValue */
-			fseek(fp, 0x141700, SEEK_SET);
-			fprintf(fp, "%c", 0x32); // move.w  d2,d1
-			fprintf(fp, "%c", 0x02);
-			fprintf(fp, "%c", 0x02); // andi.w  #GROWTH_MASK_VALUE,d1
-			fprintf(fp, "%c", 0x41);
-			fprintf(fp, "%c", 0x00);
-			fprintf(fp, "%c", 0x3F);
-			fprintf(fp, "%c", 0x67); // beq.s   @return
-			fprintf(fp, "%c", 0x10);
-			fprintf(fp, "%c", 0x4E); // jsr     CalculateGrowthTarget
-			fprintf(fp, "%c", 0xB9);
-			fprintf(fp, "%c", 0x00);
-			fprintf(fp, "%c", 0x02);
-			fprintf(fp, "%c", 0x4A);
-			fprintf(fp, "%c", 0x44);
-			fprintf(fp, "%c", 0xD8); // add.w   d1,d4
-			fprintf(fp, "%c", 0x41);
-			fprintf(fp, "%c", 0xC9); // muls.w  #PromotePercent,d4
-			fprintf(fp, "%c", 0xFC);
-			fprintf(fp, "%c", 0x00);
-			fprintf(fp, "%c", PromotePercent);
-			fprintf(fp, "%c", 0x89); // divs.w  #100,d4
-			fprintf(fp, "%c", 0xFC);
-			fprintf(fp, "%c", 0x00);
-			fprintf(fp, "%c", 0x64);
-			fprintf(fp, "%c", 0x4E); // rts
-			fprintf(fp, "%c", 0x75);
+//			fseek(fp, 0x141700, SEEK_SET);
+//			fprintf(fp, "%c", 0x32); // move.w  d2,d1
+//			fprintf(fp, "%c", 0x02);
+//			fprintf(fp, "%c", 0x02); // andi.w  #GROWTH_MASK_VALUE,d1
+//			fprintf(fp, "%c", 0x41);
+//			fprintf(fp, "%c", 0x00);
+//			fprintf(fp, "%c", 0x3F);
+//			fprintf(fp, "%c", 0x67); // beq.s   @return
+//			fprintf(fp, "%c", 0x10);
+//			fprintf(fp, "%c", 0x4E); // jsr     CalculateGrowthTarget
+//			fprintf(fp, "%c", 0xB9);
+//			fprintf(fp, "%c", 0x00);
+//			fprintf(fp, "%c", 0x02);
+//			fprintf(fp, "%c", 0x4A);
+//			fprintf(fp, "%c", 0x44);
+//			fprintf(fp, "%c", 0xD8); // add.w   d1,d4
+//			fprintf(fp, "%c", 0x41);
+//			fprintf(fp, "%c", 0xC9); // muls.w  #PromotePercent,d4
+//			fprintf(fp, "%c", 0xFC);
+//			fprintf(fp, "%c", 0x00);
+//			fprintf(fp, "%c", PromotePercent);
+//			fprintf(fp, "%c", 0x89); // divs.w  #100,d4
+//			fprintf(fp, "%c", 0xFC);
+//			fprintf(fp, "%c", 0x00);
+//			fprintf(fp, "%c", 0x64);
+//			fprintf(fp, "%c", 0x4E); // rts
+//			fprintf(fp, "%c", 0x75);
 
 			/* InitializeNewGame */
 			if (JogurtLevels) {
