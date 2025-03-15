@@ -135,6 +135,25 @@ else if (currentPage == 2) {
     if (p.x >= centerOffset + 170 && p.x <= centerOffset + 183 && p.y >= yStart + 60 && p.y <= yStart + 73) {
         FixDoubles = !FixDoubles; // Fix Class Double Setting
     }
+    int fixX = 200;      // X coordinate for fixes options
+    int fixY = 140;     // Y coordinate for the "Automatic Item Passing" checkbox
+
+    // Check if click is within the "Automatic Item Passing" checkbox area
+    if (p.x >= fixX + 160 && p.x <= fixX + 180 + 13 &&
+        p.y >= fixY && p.y <= fixY + 13) {
+        ItemPassing = !ItemPassing;
+        return 0;
+    }
+
+    // If Automatic Item Passing is enabled, check the "In Battle Item Passing" checkbox area
+    if (ItemPassing) {
+        fixY += 30; // Update Y coordinate for second checkbox
+        if (p.x >= fixX + 160 && p.x <= fixX + 180 + 13 &&
+            p.y >= fixY && p.y <= fixY + 13) {
+            ItemPassingBattle = !ItemPassingBattle;
+            return 0;
+        }
+    }
 }
 else if (currentPage == 3) {
     // Page 3: Mechanics

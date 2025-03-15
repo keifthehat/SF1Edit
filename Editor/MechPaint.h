@@ -58,7 +58,7 @@ if (currentPage == 1) {
     TextOut(memdc, tableX + 20, tableY - 30, "Kill EXP Table", 14);
 
     // EXP5Above
-    TextOut(memdc, tableX, tableY, "5+ Levels:", 18);
+    TextOut(memdc, tableX, tableY, "5+ Levels:", 10);
     sprintf(out, "%d", EXP5Above);
     if (focus == 17 && cursor) sprintf(out, "%s|", out);
     TextOut(memdc, tableX + 125, tableY, out, strlen(out));
@@ -178,6 +178,8 @@ else if (currentPage == 2) {
     // Page 2: Fixes
     int centerOffset = 200; // Center alignment
     int yStart = 50;        // Starting Y position
+    int fixX = 200; //passing
+    int fixY = 140; //passing  
 
     TextOut(memdc, centerOffset, yStart, "Fix Muddle:", 11);
     if (FixMuddle) SelectObject(bmpdc, checkon);
@@ -194,6 +196,19 @@ else if (currentPage == 2) {
     if (FixDoubles) SelectObject(bmpdc, checkon);
     else SelectObject(bmpdc, checkoff);
     BitBlt(memdc, centerOffset + 170, yStart + 62, 13, 13, bmpdc, 0, 0, SRCCOPY);
+
+    TextOut(memdc, fixX, fixY, "Automatic Item Passing:", 24);
+    if (ItemPassing) SelectObject(bmpdc, checkon);
+    else SelectObject(bmpdc, checkoff);
+    BitBlt(memdc, fixX + 160, fixY, 13, 13, bmpdc, 0, 0, SRCCOPY);
+
+    if (ItemPassing) {
+        fixY += 30; 
+        TextOut(memdc, fixX, fixY, "In Battle Item Passing:", 24);
+        if (ItemPassingBattle) SelectObject(bmpdc, checkon);
+        else SelectObject(bmpdc, checkoff);
+        BitBlt(memdc, fixX + 160, fixY, 13, 13, bmpdc, 0, 0, SRCCOPY);
+    }
 }
 else if (currentPage == 3) {
     // Page 3: Mechanics
