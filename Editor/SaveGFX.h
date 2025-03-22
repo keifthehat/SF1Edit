@@ -1434,12 +1434,18 @@ void SaveGFX() {
 			}
 
 			fseek(fp, o2, SEEK_SET);
-			len = PC.PutData(WSSize[s][0][0], WSSize[s][0][0] * WSSize[s][0][1], WeaponSprites[s][0]);
+			len = PC.PutData(WSSize[0][0][0], WSSize[0][0][0] * WSSize[0][0][1], WeaponSprites[s][0]);
 			d += len;
 			if (d % 2)d++;
 
 			o2 += d;
 		}
+		fseek(fp, o, SEEK_SET);
+		fprintf(fp, "%c", 0xFF);
+		fprintf(fp, "%c", 0xFF);
+		fprintf(fp, "%c", 0xFF);
+		fprintf(fp, "%c", 0xFF);
+		o += 4;
 
 
 		if (o2 % 4)o2 += 4 - (o2 % 4);

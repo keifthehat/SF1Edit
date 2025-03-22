@@ -556,7 +556,7 @@ void LoadGFX(char *path, bool single = false) {
 			o2 = o2 * 256 + r;
 			o += 4;
 
-			if (!s && o2 == 0x300000)
+			if (!s && o2 >= 0x300000)
 				ExpandedGraphics = true;
 
 			if (ExpandedGraphics)o2 += 0x100000;
@@ -683,7 +683,8 @@ void LoadGFX(char *path, bool single = false) {
 	o = WSBankOffset;
 	o2 = 0;
 	o3 = 0;
-	t = -1;
+	t = 0;
+	s = -1;
 
 	if (!single) {
 		if (WSBankOffset == 0x23EBD0 || WSBankOffset == 0x1E7000) {
@@ -694,51 +695,70 @@ void LoadGFX(char *path, bool single = false) {
 		} else NumGFX[2] = 15;
 	} else NumGFX[2] = 15;
 
+
 	if (!single || submode[mode] == 2)
-		for (s = 0; s<31 + (NumGFX[2] - 15); s++) {
+		for (;;) {
+			WSRepeat[t] = 0;
+			
+			fseek(fp, o, SEEK_SET);
+			fscanf(fp, "%c", &r);
+			o2 = r;
+			fscanf(fp, "%c", &r);
+			o2 = o2 * 256 + r;
+			fscanf(fp, "%c", &r);
+			o2 = o2 * 256 + r;
+			fscanf(fp, "%c", &r);
+			o2 = o2 * 256 + r;
+			o += 4;
+
+			
+			if (o2 == 0xFFFFFFFF || o2 > 0x800000)
+				break;
+
+			if (WSBankOffset == 0x1602E2 && s >= 31)break;
+
 			o3 = o2;
 
-			if (t >= 0)WSRepeat[t] = 0;
-			s--;
 
 			while (o3 == o2) {
 				fseek(fp, o, SEEK_SET);
 				fscanf(fp, "%c", &r);
-				o2 = r;
+				o3 = r;
 				fscanf(fp, "%c", &r);
-				o2 = o2 * 256 + r;
+				o3 = o3 * 256 + r;
 				fscanf(fp, "%c", &r);
-				o2 = o2 * 256 + r;
+				o3 = o3 * 256 + r;
 				fscanf(fp, "%c", &r);
-				o2 = o2 * 256 + r;
+				o3 = o3 * 256 + r;
 				o += 4;
-				if (t >= 0)WSRepeat[t]++;
+				WSRepeat[t]++;
 				s++;
 			}
 
+			o -= 4;
+
+
+			//if (!ExpandedGraphics && s > 30)break;
+
+			fseek(fp, o2, SEEK_SET);
+
+			for (int f = 0; f<1; f++) {
+				len = PD.GetData(o2, &data);
+				WSSize[t][f][0] = PD.width;
+				WSSize[t][f][1] = PD.height;
+
+				for (int i = 0; i<len; i++) {
+					c = data[i];
+					if (c == 0xFF)WeaponSprites[t][f][i] = l;
+					else {
+						WeaponSprites[t][f][i] = c;
+						l = c;
+					}
+				}
+				//delete data;
+			}
 			t++;
 
-			if(s<31 + (NumGFX[2] - 15))
-			if (!single || s == subselect[mode][submode[mode]]) {
-
-				fseek(fp, o2, SEEK_SET);
-
-				for (int f = 0; f<1; f++) {
-					len = PD.GetData(o2, &data);
-					WSSize[t][f][0] = PD.width;
-					WSSize[t][f][1] = PD.height;
-
-					for (int i = 0; i<len; i++) {
-						c = data[i];
-						if (c == 0xFF)WeaponSprites[t][f][i] = l;
-						else {
-							WeaponSprites[t][f][i] = c;
-							l = c;
-						}
-					}
-					//delete data;
-				}
-			}
 		}
 
 	o = BGBankOffset;
